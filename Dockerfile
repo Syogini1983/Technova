@@ -1,17 +1,11 @@
-# Use an official Python base image
+# Use a lightweight Python base image
 FROM python:3.10-slim
 
-# Set working directory
+# Set the working directory
 WORKDIR /app
 
-# Copy code
-COPY . .
+# Copy the script into the container
+COPY app.py .
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose the port
-EXPOSE 5000
-
-# Run the Flask app
+# Run the Python script
 CMD ["python", "app.py"]
