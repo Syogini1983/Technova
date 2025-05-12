@@ -8,12 +8,17 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Run') {
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t simple-python-app .'
+            }
+        }
+
+        stage('Run Docker Container') {
             steps {
                 sh '''
-                    docker build -t technova-app .
-                    docker rm -f technova-container || true
-                    docker run -d -p 5000:5000 --name technova-container technova-app
+                    docker rm -f simple-container || true
+                    docker run --name simple-container simple-python-app
                 '''
             }
         }
