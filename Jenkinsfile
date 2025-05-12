@@ -8,26 +8,6 @@ pipeline {
             }
         }
 
-        stage('Create Virtual Environment & Install Requirements') {
-            steps {
-                sh '''
-                    python3 -m venv venv
-                    source venv/bin/activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
-                '''
-            }
-        }
-
-        stage('Run App') {
-            steps {
-                sh '''
-                    source venv/bin/activate
-                    nohup python app.py &
-                '''
-            }
-        }
-
         stage('Docker Build & Run') {
             steps {
                 sh '''
@@ -39,4 +19,3 @@ pipeline {
         }
     }
 }
-
